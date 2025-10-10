@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import connect from "@/db";
+import connect from "@/lib/mongodb";
 import Comment from "@/models/comment";
 
 export async function POST(req: Request) {
