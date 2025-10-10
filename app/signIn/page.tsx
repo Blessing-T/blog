@@ -46,7 +46,7 @@ export default function SigninPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#191B1F] ">
+    <div className="flex justify-center items-center min-h-screen bg-[#191B1F] text-black h-screen bg-[url('/banner.jpg')] bg-cover bg-center">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-xl shadow-md w-80 mt-20"

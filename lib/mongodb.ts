@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
-const MONGO_URI= 
-"mongodb+srv://geraldgchibanda6025_db_user:c9OeXEWOGvxJ3YE0@cluster0.xhwm0ed.mongodb.net/Next15?retryWrites=true&w=majority&appName=Cluster0"
+const MONGO_URL= process.env.MONGO_URL;
   
 
-if (!MONGO_URI) {
-  throw new Error("MongoDB URI is not defined");
+if (!MONGO_URL) {
+  throw new Error("MongoDB URL is not defined");
 }
 
 
@@ -27,7 +26,7 @@ async function connectToDB() {
 
   if (!global._mongoose.promise) {
     global._mongoose.promise = mongoose
-      .connect(MONGO_URI)
+      .connect(MONGO_URL!)
       .then((mongoose) => mongoose)
       .catch((err) => {
         console.error("MongoDB connection error:", err);

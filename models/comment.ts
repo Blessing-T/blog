@@ -1,26 +1,19 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Document } from "mongoose";
 
+export interface IComment extends Document {
+  postId: string;
+  name: string;
+  text: string;
+  createdAt: Date;
+}
 
-const { Schema } = mongoose
+const CommentSchema = new Schema(
+  {
+    postId: { type: String, required: true }, 
+    name: { type: String, required: true },
+    text: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
-const commentSchema = new Schema({
-
-    title: {
-        type: String,
-        required: true
-    },
-
-    description: {
-        type: String,
-        required: true,
-
-    },
-
-    imageurl:{
-        type: String,
-        required: true
-    }
-
- },{timestamps:true})
-
- export default mongoose.models.comment || mongoose.model('comment', commentSchema)
+export default mongoose.models.Comment || mongoose.model<IComment>("Comment", CommentSchema);
