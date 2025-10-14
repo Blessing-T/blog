@@ -20,7 +20,7 @@ export default function CommentSection() {
  
   const fetchComments = async () => {
     try {
-      const response = await fetch(`/api/comments?postId=${postId}`);
+  const response = await fetch(`/api/comment?postId=${postId}`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +50,7 @@ export default function CommentSection() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/comments", {
+  const response = await fetch("/api/comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

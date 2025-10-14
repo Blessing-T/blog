@@ -1,7 +1,8 @@
 "use client";
 import EmblaCarousel from "@/components/banner";
 import { useState } from "react";
-import { Newspaper, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import Image from "next/image";
 
 const newsArticles = [
   {
@@ -69,11 +70,15 @@ export default function GeneralNewsPage() {
             key={article.id}
             className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-transform transform hover:-translate-y-1"
           >
-            <img
-              src={article.image}
-              alt={article.title}
-              className="h-48 w-full object-cover"
-            />
+            <div className="h-48 w-full relative">
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                className="object-cover rounded-t-2xl"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
             <div className="p-5">
               <p className="text-sm text-blue-600 font-semibold uppercase mb-2">
                 {article.category}
