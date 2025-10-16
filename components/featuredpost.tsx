@@ -52,8 +52,7 @@ export default function FeaturedPost() {
             category={post.category}
             date={post.date}
             title={post.title}
-            description={post.description}
-          />
+            description={post.description} id={""}          />
         ))}
       </div>
     </article>

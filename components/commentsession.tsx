@@ -81,7 +81,7 @@ export default function CommentSection() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10 text-black">
-      <div className="md:col-span-2 items-start">
+      <div className="md:col-span-2 items-start gap-8">
         <h3 className="text-lg font-bold mb-6">RECENT COMMENTS</h3>
         
     

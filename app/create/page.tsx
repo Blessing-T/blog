@@ -6,18 +6,28 @@ export default function CreatePost() {
   const [content, setContent] = useState<string>("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  await fetch(`${process.env.MONGO_URL}/api/post`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, content }),
-  });
+    try {
+      const res = await fetch(`/api/post`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, content }),
+      });
 
-  setTitle("");
-  setContent("");
-  window.location.reload();
-};
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error('Failed to create post', err);
+        return;
+      }
+
+      setTitle("");
+      setContent("");
+      window.location.reload();
+    } catch (err) {
+      console.error('Network error creating post', err);
+    }
+  };
 
 
   return (

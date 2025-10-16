@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 export default function SigninPage() {
@@ -19,22 +20,22 @@ export default function SigninPage() {
     setMessage("");
 
     try {
-      const res = await fetch("/api/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: form.email,
+        password: form.password,
+      }) as { error?: string } | undefined;
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Invalid credentials");
+      if (result && result.error) {
+        setMessage(` ${result.error}`);
+        setMessageColor("text-red-500");
+        return;
+      }
 
-      
-      setMessage(` Welcome back, ${data.user.username}!`);
+      setMessage(" Signed in");
       setMessageColor("text-green-500");
       setForm({ email: "", password: "" });
-
-      
-      setTimeout(() => router.push("/"), 1000);
+      setTimeout(() => router.push("/dashboard"), 700);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(` ${err.message}`);
